@@ -65,7 +65,7 @@ Indigo | Kinetic
             roslaunch mra_control mra7a_hw_trajectory_bingup.launch
             roslaunch mra7a_gazebo mra7a_bringup_rviz.launch
             
-    * Contorl single joint by QT control panel.(You need install [QT](http://download.qt.io/archive/qt/))
+    * Contorl single joint by QT control panel.(You need install [QT](http://download.qt.io/archive/qt/))<br>
         In the mra_basic/src/control_panel/CMakeLists.txt
     
             set(CMAKE_PREFIX_PATH "/home/lmn/Qt5.3.2/5.3/gcc/lib/cmake") //Set your QT path.
