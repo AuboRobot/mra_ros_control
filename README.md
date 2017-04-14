@@ -35,10 +35,14 @@ Indigo | Kinetic
 ## Using instruction
 * Create a catkin workspace if you don't already have one (we recommend a separate one for MRA)
 
->
-	mkdir -p ~/ros_ws/mra_ros_ws/src  	
-	cd ~/ros_ws/mra_ros_ws/src  
-	catkin_init_workspace  
+
+        mkdir -p ~/ros_ws/mra_ros_ws/src  	
+        cd ~/ros_ws/mra_ros_ws/src  
+        catkin_init_workspace 
+	
+* Clone this respository to your catkin workspace
+        cd ~/ros_ws/mra_ros_ws/src  
+        git clone https://github.com/auboROS/mra7a.git
 	
 	
 	
