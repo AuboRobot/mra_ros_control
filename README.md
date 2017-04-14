@@ -15,9 +15,10 @@ Indigo | Kinetic
 6. The **ros_controllers** stack is the implement of related ros controllers.<br>
 7. The **moveit_visual_tools** package is the helper for displaying and debugging MoveIt! data in Rviz<br>
 
-<img align="right" src="./resources/mra7a.png" width=500 height=300/>
+
 
 ## Features
+<img align="right" src="./resources/mra7a.png" width=500 height=300/>
 * The MRA has kinds of arm configurations composed of the module joins, such as dual arms, 7Dofs arm, 6Dofs arm, etc.
 
 * You can only modify the configure file to suit different Dof arms, and don't need to modify the mra_basic source code.
