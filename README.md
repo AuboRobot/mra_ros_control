@@ -15,8 +15,6 @@ Indigo | Kinetic
 6. The **ros_controllers** stack is the implement of related ros controllers.<br>
 7. The **moveit_visual_tools** package is the helper for displaying and debugging MoveIt! data in Rviz<br>
 
-
-
 ## Features
 <img align="right" src="./resources/mra7a.png" width=500 height=300/>
 
@@ -28,3 +26,22 @@ Indigo | Kinetic
     * basic position, velocity, effort.
     * controlling signle joint or arms by ros_control.
     
+## Prerequisites
+* A kind of MRA description with moveit configure.(If you need to plan to control the mra.) For example [mra7a](https://github.com/auboROS/mra7a).
+* (Optional) Gripper.
+* [ROS Indigo](http://wiki.ros.org/ROS/Installation) on (suggested) Ubuntu 14.04, or ROS Kinetic on Ubuntu 16.04 (under development)
+* [MoveIt!](http://moveit.ros.org/install/): sudo apt-get install ros-<indigo\>-moveit
+
+## Using instruction
+* Create a catkin workspace if you don't already have one (we recommend a separate one for MRA)
+	
+	mkdir -p ~/ros_ws/mra_ros_ws/src	
+	cd ~/ros_ws/mra_ros_ws/src
+	catkin_init_workspace
+	
+	
+	
+	
+	
+	
+	
