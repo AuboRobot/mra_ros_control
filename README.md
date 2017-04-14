@@ -28,22 +28,43 @@ Indigo | Kinetic
     
 ## Prerequisites
 * A kind of MRA description with moveit configure.(If you need to plan to control the mra.) For example [mra7a](https://github.com/auboROS/mra7a).
-* (Optional) Gripper.
+* A real MRA and gripper(Optional).
 * [ROS Indigo](http://wiki.ros.org/ROS/Installation) on (suggested) Ubuntu 14.04, or ROS Kinetic on Ubuntu 16.04 (under development)
 * [MoveIt!](http://moveit.ros.org/install/): sudo apt-get install ros-<indigo\>-moveit
 
 ## Using instruction
 * Create a catkin workspace if you don't already have one (we recommend a separate one for MRA)
 
-
         mkdir -p ~/ros_ws/mra_ros_ws/src  	
         cd ~/ros_ws/mra_ros_ws/src  
         catkin_init_workspace 
 	
 * Clone this respository to your catkin workspace
+
         cd ~/ros_ws/mra_ros_ws/src  
-        git clone https://github.com/auboROS/mra7a.git
-	
+        git clone https://github.com/auboROS/mra_ros_control.git
+        
+* Compiling
+
+        cd ~/ros_ws/mra_ros_ws
+        catkin_make
+        
+* Running
+Firstly, startup the your MRA hardware.
+
+    * Control single joint by ros_control.
+    
+        roslaunch mra_control mra7a_hw_position_bingup.launch
+        rostopic pub /mra/joint7_command std_msg/Float64 1.5 //control the seventh joint move 1.5 radio.
+        
+    * Control the whole arm by planning.
+    
+        roslaunch mra_control mra7a_hw_trajectory_bingup.launch
+        roslaunch mra7a_gazebo mra7a_bringup_rviz.launch
+
+
+
+
 	
 	
 	
