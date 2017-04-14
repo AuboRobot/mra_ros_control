@@ -6,5 +6,6 @@
 #include "gripper.h"
 #include "joint.h"
 #include "usercontroloncan.h"
+#include "module.h"
 
 #endif

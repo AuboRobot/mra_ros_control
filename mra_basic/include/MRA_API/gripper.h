@@ -18,7 +18,7 @@
 #ifndef GRIPPER_H
 #define GRIPPER_H
 
-#include "driver.h"
+#include "module.h"
 
 #define CMDLENGTH_FINGER 0x44 // 内存控制表长度（单位：字节）
 
@@ -91,7 +91,7 @@
 #define ERROR_MASK_OVER_TEMP_FINGER     0x0004      // 过温
 #define ERROR_MASK_RX28_FINGER          0x0008      // 舵机错误
 
-class Gripper
+class Gripper : public Module
 {
 public:
     Gripper(uint32_t ID, Driver * d);
@@ -314,10 +314,8 @@ public:
     bool FingerSysSaveToFlash();
 
     /// @brief 发送读内存控制表的命令.
-    void MemoryTableInit();
+    virtual void MemoryTableInit();
 
-    uint32_t ID;
-    Driver * busDriver;
     uint16_t MemoryControlTable[CMDLENGTH_FINGER];
 protected:
 };

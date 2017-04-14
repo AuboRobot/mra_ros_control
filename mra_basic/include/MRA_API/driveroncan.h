@@ -23,6 +23,8 @@
 #include "gripper.h"
 #include <pthread.h>
 #include <vector>
+#include <fstream>
+#include <libpcan.h>
 
 #define SEARCH_MAX_ID           40      // 搜索ID时的上限
 
@@ -49,13 +51,27 @@ public:
     /// @return bool Indication of successful
     bool updateAllID();
 
+    /// @brief 设置日志记录功能
+    void SetLog(bool isLogging);
+
+    /// @brief 线程挂起，延时作用
+    void delayMs(uint32_t millisecond);
+
     std::vector<Joint> allJoint;        // 关节
     std::vector<Gripper> allGripper;    // 手爪
 protected:
-    void searchIDandInitMemoryTable();  // 搜索ID并初始化模块的内存控制表
+    /// @brief 搜索ID并初始化模块的内存控制表
+    void searchIDandInitMemoryTable();
+
     void * m_hCan;                      // Handle of CAN bus
     pthread_mutex_t hMutex;             // mutex signal of CAN writing
     pthread_t receive_thread;
+private:
+    /// @brief 将CAN报文输出到文件
+    void outLog(TPCANMsg txmsg, bool isSend);
+
+    std::ofstream outfile;              // 输出的日志文件
+    bool isLog;                         // 日志文件输出与否标志
 };
 
 #endif // DRIVERONCAN_H

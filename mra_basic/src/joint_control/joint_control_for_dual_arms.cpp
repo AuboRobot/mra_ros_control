@@ -44,11 +44,46 @@
 #include <std_msgs/Bool.h>
 
 using namespace mra_basic_config;
+using namespace std;
 
 UserControlOnCan *left_arm_dev;
 UserControlOnCan *right_arm_dev;
-
 mra_core_msgs::AssemblyState mra_state;
+
+void show_ID_in_current_canbus()
+{
+    cout << "Joint ID in left arm CANBUS:";
+    for (std::vector<Joint>::iterator iter = left_arm_dev->controller.allJoint.begin();
+         iter != left_arm_dev->controller.allJoint.end();
+         ++iter) {
+        cout << " --- " << iter.base()->ID;
+    }
+    cout << endl;
+
+    cout << "Finger ID in left arm CANBUS:";
+    for (std::vector<Gripper>::iterator iter = left_arm_dev->controller.allGripper.begin();
+         iter != left_arm_dev->controller.allGripper.end();
+         ++iter) {
+        cout << " --- " << iter.base()->ID;
+    }
+    cout << endl;
+
+    cout << "Joint ID in right arm CANBUS:";
+    for (std::vector<Joint>::iterator iter = right_arm_dev->controller.allJoint.begin();
+         iter != right_arm_dev->controller.allJoint.end();
+         ++iter) {
+        cout << " --- " << iter.base()->ID;
+    }
+    cout << endl;
+
+    cout << "Finger ID in right arm CANBUS:";
+    for (std::vector<Gripper>::iterator iter = right_arm_dev->controller.allGripper.begin();
+         iter != right_arm_dev->controller.allGripper.end();
+         ++iter) {
+        cout << " --- " << iter.base()->ID;
+    }
+    cout << endl;
+}
 
 void L_ARM_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
 {
@@ -98,18 +133,24 @@ void MRA_API_INIT(const std_msgs::Bool &reset) {
             for(int i=0; i<L_jointID.size(); i++) {
                 left_arm_dev->setJointAutoUpdateCurPos(L_jointID[i],true);
             }
-        } else {
-            ROS_ERROR("Can't Open the L_ARM_DEV");
+        } else{
+            std::string s;
+            left_arm_dev->controller.GetErrorText(s);
+            ROS_ERROR("Can't Open the L_ARM_DEV:%s",s.c_str());
         }
         if(right_arm_dev->Init(R_ARM_DEV)) {
             ok++;
             for(int i=0; i<R_jointID.size(); i++) {
                 right_arm_dev->setJointAutoUpdateCurPos(R_jointID[i],true);
             }
-        } else {
-            ROS_ERROR("Can't Open the R_ARM_DEV");
+        } else{
+            std::string s;
+            right_arm_dev->controller.GetErrorText(s);
+            ROS_ERROR("Can't Open the R_ARM_DEV:%s",s.c_str());
         }
         if(ok == 2) {
+            show_ID_in_current_canbus();
+
             mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL;
             mra_state.enabled = true;
         }
@@ -163,16 +204,16 @@ int main(int argc, char **argv)
 
         if(mra_state.canbus_state==mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL) {
             /*get joint states and publish it*/
-                for(int i=0; i<L_jointID.size(); i++) {
-                    joint_state.position[i] = left_arm_dev->readJointCurPos(L_jointID[i]);
-                    joint_state.velocity[i] = left_arm_dev->readJointCurSpd(L_jointID[i]);
-                    joint_state.effort[i] = left_arm_dev->readJointCurI(L_jointID[i]);
-                }
-                for(int i=0; i<R_jointID.size(); i++) {
-                    joint_state.position[i+L_jointID.size()] = right_arm_dev->readJointCurPos(R_jointID[i]);
-                    joint_state.velocity[i+L_jointID.size()] = right_arm_dev->readJointCurSpd(R_jointID[i]);
-                    joint_state.effort[i+L_jointID.size()] = right_arm_dev->readJointCurI(R_jointID[i]);
-                }
+            for(int i=0; i<L_jointID.size(); i++) {
+                joint_state.position[i] = left_arm_dev->readJointCurPos(L_jointID[i]);
+                joint_state.velocity[i] = left_arm_dev->readJointCurSpd(L_jointID[i]);
+                joint_state.effort[i] = left_arm_dev->readJointCurI(L_jointID[i]);
+            }
+            for(int i=0; i<R_jointID.size(); i++) {
+                joint_state.position[i+L_jointID.size()] = right_arm_dev->readJointCurPos(R_jointID[i]);
+                joint_state.velocity[i+L_jointID.size()] = right_arm_dev->readJointCurSpd(R_jointID[i]);
+                joint_state.effort[i+L_jointID.size()] = right_arm_dev->readJointCurI(R_jointID[i]);
+            }
             joint_state_pub.publish(joint_state);
 
             /*pub mra_state*/

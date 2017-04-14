@@ -29,9 +29,11 @@ public:
     bool setGripperTagOpenStatus(uint32_t theID, int mode);
     DriverOnCan controller;
 
-private:
     Joint *findJointID(uint32_t theID);
     Gripper *findGripperID(uint32_t theID);
+private:
+    bool setJointAutoUpdate(uint32_t theID, bool enabled, uint8_t label);
+    bool updateJointCurItem(uint32_t theID, uint8_t item);
 };
 
 #endif // USERCONTROLONCAN_H

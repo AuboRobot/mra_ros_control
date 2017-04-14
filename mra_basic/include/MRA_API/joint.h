@@ -18,7 +18,7 @@
 #ifndef JOINT_H
 #define JOINT_H
 
-#include "driver.h"
+#include "module.h"
 
 #define CMDLENGTH           160 // 内存控制表长度（单位：字节）
 
@@ -187,12 +187,9 @@
 #define ERROR_MASK_CURRENT_INIT     0x0080      /**< Error code of current detection */
 #define ERROR_MASK_FUSE             0x0100      /**< Error code of fuse */
 
-class Joint
+class Joint : public Module
 {
 public:
-    /// @brief 构造函数
-    /// @param ID 关节ID
-    /// @param d 该关节所在的总线
     Joint(uint32_t ID, Driver * d);
 
     /// @brief Save to flash.
@@ -341,9 +338,6 @@ public:
     /// @return uint16_t model type
     uint16_t getModelType();
 
-    /// @brief 发送读内存控制表的命令.
-    void MemoryTableInit();
-
     /// @brief
     /// @param
     /// @return bool Indication of successful
@@ -357,8 +351,9 @@ public:
     /// @return int
     uint16_t getScpMask();
 
-    uint32_t ID; // 模块类型
-    Driver * busDriver; // 模块所在的总线
+    /// @brief 发送读内存控制表的命令.
+    virtual void MemoryTableInit();
+
     uint16_t MemoryControlTable[CMDLENGTH]; // 模块内存控制表
 protected:
 

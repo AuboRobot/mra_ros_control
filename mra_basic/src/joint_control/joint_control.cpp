@@ -44,9 +44,29 @@
 #include <std_msgs/Bool.h>
 
 using namespace mra_basic_config;
+using namespace std;
 
 UserControlOnCan *userControlOnCan;
 mra_core_msgs::AssemblyState mra_state;
+
+void show_ID_in_current_canbus()
+{
+    cout << "Joint ID in CANBUS:";
+    for (std::vector<Joint>::iterator iter = userControlOnCan->controller.allJoint.begin();
+         iter != userControlOnCan->controller.allJoint.end();
+         ++iter) {
+        cout << " --- " << iter.base()->ID;
+    }
+    cout << endl;
+
+    cout << "Finger ID in CANBUS:";
+    for (std::vector<Gripper>::iterator iter = userControlOnCan->controller.allGripper.begin();
+         iter != userControlOnCan->controller.allGripper.end();
+         ++iter) {
+        cout << " --- " << iter.base()->ID;
+    }
+    cout << endl;
+}
 
 void joint_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
 {
@@ -71,13 +91,16 @@ void MRA_API_INIT(const std_msgs::Bool &reset) {
 
     userControlOnCan = new UserControlOnCan();
     if(userControlOnCan->Init(DEFAULT_NODE)) {
+        show_ID_in_current_canbus();
         mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL;
         mra_state.enabled = true;
         for(int i=0; i<jointID.size(); i++) {
             userControlOnCan->setJointAutoUpdateCurPos(jointID[i],true);
         }
     } else {
-        ROS_ERROR("Can't Open the pcanusb32");
+        std::string s;
+        userControlOnCan->controller.GetErrorText(s);
+        ROS_ERROR("Can't Open the pcanusb32:%s",s.c_str());
     }
 }
 

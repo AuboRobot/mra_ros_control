@@ -18,7 +18,7 @@
 #ifndef DRIVER_H
 #define DRIVER_H
 
-#include <stdint.h>
+#include <string>
 
 // Macro definition of command type
 #define CMDTYPE_RD          0x01    // Reading command type
@@ -28,11 +28,16 @@
 #define CMDTYPE_SCP         0x05    // Command for data return of oscilloscope (Reserved)
 #define CMDTYPE_RD_HP       0x08    // 读控制表指令，高优先级
 
+typedef unsigned char       uint8_t;
+typedef unsigned short      uint16_t;
+typedef unsigned int        uint32_t;
+typedef unsigned long long  uint64_t;
 
 class Driver
 {
 public:
     Driver();
+    virtual ~Driver();
 
     /// @brief 初始化总线
     /// @param deviceName 设备名称
@@ -73,6 +78,13 @@ public:
     virtual bool GetValueInTable(uint16_t ID,
                                  uint8_t addr,
                                  uint16_t &data) = 0;
+
+    /// @brief 获取错误信息
+    void GetErrorText(std::string &Buffer);
+
+    std::string errorTxt;               // 保存错误信息
+protected:
+
 };
 
 #endif // DRIVER_H
