@@ -1,0 +1,110 @@
+mra:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Mode controllers used to switch between control methods ----------------------------
+  position_joint_mode_controller:
+    type: joint_mode_controller/JointModeController
+    joint_mode: 1 # position
+
+  velocity_joint_mode_controller:
+    type: joint_mode_controller/JointModeController
+    joint_mode: 2 # velocity
+
+  # Position - Right and Left Joint Position Trajectory Controllers -------------------
+  arm_trajectory_controller:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - Joint1
+      - Joint2
+      - Joint3
+      - Joint4
+      - Joint5
+      - Joint6
+      - Joint7
+
+    constraints:
+      goal_time: 2.0                   # Defaults to zero
+      stopped_velocity_tolerance: 0.1 # Defaults to 0.01
+      Joint1:
+        trajectory: 0 
+        goal: 0.2       
+      Joint2:
+        trajectory: 0 
+        goal: 0.2       
+      Joint3:
+        trajectory: 0 
+        goal: 0.2       
+      Joint4:
+        trajectory: 0 
+        goal: 0.2       
+      Joint5:
+        trajectory: 0 
+        goal: 0.2       
+      Joint6:
+        trajectory: 0 
+        goal: 0.2       
+      Joint7:
+        trajectory: 0 
+        goal: 0.2       
+
+    state_publish_rate:  50 # Defaults to 50
+    action_monitor_rate: 20 # Defaults to 20
+    #hold_trajectory_duration: 0 # Defaults to 0.5
+
+
+# Velocity - Joint Velocity Trajectory Controllers -------------------
+  arm_velocity_trajectory_controller:
+    type: "velocity_controllers/JointTrajectoryController"
+    joints:
+      - Joint1
+      - Joint2
+      - Joint3
+      - Joint4
+      - Joint5
+      - Joint6
+      - Joint7
+
+    constraints:
+      goal_time: 2.0                   # Defaults to zero
+      stopped_velocity_tolerance: 0.4 # Defaults to 0.01
+      Joint1:
+        trajectory: 0 
+        goal: 0.2       
+      Joint2:
+        trajectory: 0 
+        goal: 0.2       
+      Joint3:
+        trajectory: 0 
+        goal: 0.2       
+      Joint4:
+        trajectory: 0 
+        goal: 0.2       
+      Joint5:
+        trajectory: 0 
+        goal: 0.2       
+      Joint6:
+        trajectory: 0 
+        goal: 0.2       
+      Joint7:
+        trajectory: 0 
+        goal: 0.2       
+
+    gains:
+      Joint1: {p: 2.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      Joint2: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      Joint3: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      Joint4: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      Joint5: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      Joint6: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      Joint7: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+
+    state_publish_rate:  50 # Defaults to 50
+    action_monitor_rate: 20 # Defaults to 20
+    #hold_trajectory_duration: 0 # Defaults to 0.5
+
+
+
+

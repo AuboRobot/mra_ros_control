@@ -1,0 +1,54 @@
+<package>
+  <name>mra_ros_control</name>
+  <version>1.0.0</version>
+  <description>This stack is used to control real aubo's MRA(module robot amr) by ros control.</description>
+
+  <maintainer email="mengnanli@aliyun.com">lmn</maintainer>
+
+  <license>BSD</license>
+
+  <author>lmn</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+<!-- moveit_visual_tools-->
+  <run_depend>moveit_ros_robot_interaction</run_depend>
+  <run_depend>moveit_core</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>visualization_msgs</run_depend>
+  <run_depend>graph_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>moveit_msgs</run_depend>
+  <run_depend>trajectory_msgs</run_depend>
+<!-- mra_basic-->
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>mra_core_msgs</run_depend>
+<!-- mra_control-->
+  <run_depend>moveit_ros_planning_interface</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>mra_core_msgs</run_depend>
+  <run_depend>controller_manager</run_depend>
+  <run_depend>transmission_interface</run_depend>
+  <run_depend>hardware_interface</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>joint_limits_interface</run_depend>
+  <run_depend>mra_description</run_depend>
+  <run_depend>trajectory_msgs</run_depend>
+  <run_depend>moveit_msgs</run_depend>
+  <run_depend>moveit_visual_tools</run_depend>
+  <run_depend>mra_basic</run_depend>
+<!-- mra_core_msgs-->
+  <run_depend>message_runtime</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+
+
+  <export>
+    <metapackage/>
+  </export>
+</package>
