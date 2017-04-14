@@ -50,7 +50,10 @@ Indigo | Kinetic
         catkin_make
         
 * Running
-Firstly, startup the your MRA hardware.
+
+    Firstly, startup the your MRA hardware.
+  
+    The three control way as below:
 
     * Control single joint by ros_control.
      
