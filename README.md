@@ -53,15 +53,28 @@ Indigo | Kinetic
 Firstly, startup the your MRA hardware.
 
     * Control single joint by ros_control.
-    
-        roslaunch mra_control mra7a_hw_position_bingup.launch
-        rostopic pub /mra/joint7_command std_msg/Float64 1.5 //control the seventh joint move 1.5 radio.
-        
+     
+            roslaunch mra_control mra7a_hw_position_bingup.launch
+            rostopic pub /mra/joint7_command std_msg/Float64 1.5 //control the seventh joint move 1.5 radio.
+               
     * Control the whole arm by planning.
     
-        roslaunch mra_control mra7a_hw_trajectory_bingup.launch
-        roslaunch mra7a_gazebo mra7a_bringup_rviz.launch
-
+            roslaunch mra_control mra7a_hw_trajectory_bingup.launch
+            roslaunch mra7a_gazebo mra7a_bringup_rviz.launch
+            
+    * Contorl single joint by QT control panel.(You need install [QT](http://download.qt.io/archive/qt/))
+        In the mra_basic/src/control_panel/CMakeLists.txt
+    
+            set(CMAKE_PREFIX_PATH "/home/lmn/Qt5.3.2/5.3/gcc/lib/cmake") //Set your QT path.
+            
+        In the mra_basic/CMakeLists.txt, cancel the comment below.
+    
+            //add_subdirectory(src/control_panel)
+        Running in three terminal
+        
+            first terminal: roscore
+            second terminal: rosrun mra_basic joint_control
+            third terminal: rosrun mra_basic control_panel
 
 
 
