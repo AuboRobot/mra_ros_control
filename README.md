@@ -19,15 +19,12 @@ Indigo | Kinetic
 
 ## Features
 <img align="right" src="./resources/mra7a.png" width=500 height=300/>
+
 * The MRA has kinds of arm configurations composed of the module joins, such as dual arms, 7Dofs arm, 6Dofs arm, etc.
-
 * You can only modify the configure file to suit different Dof arms, and don't need to modify the mra_basic source code.
-
 * Support the trajectory msgs planning by move_group in MoveIt!. 
-
 * Support safe operations in real-time.
-
 *  Multiple kinds of control mode
-    * basic position, velocity, effort
+    * basic position, velocity, effort.
     * controlling signle joint or arms by ros_control.
     
