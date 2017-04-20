@@ -96,7 +96,7 @@ void L_ARM_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
         for(int i=0; i<L_jointID.size(); i++) {
             bool isSent = left_arm_dev->setJointTagPos(L_jointID[i],msg->command[i]);
             if (isSent==false) {
-                ROS_ERROR("Sent is failure");
+                ROS_ERROR("Senting is failure in left arm ID:%d",L_jointID[i]);
                 //set canbus state = CANBUS_STATE_INTERRUPT
                 mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_INTERRUPT;
             }
@@ -114,7 +114,7 @@ void R_ARM_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
         for(int i=0; i<R_jointID.size(); i++) {
             bool isSent = right_arm_dev->setJointTagPos(R_jointID[i],msg->command[i]);
             if (isSent==false) {
-                ROS_ERROR("Sent is failure");
+                ROS_ERROR("Senting is failure in rigth arm ID:%d",R_jointID[i]);
                 //set canbus state = CANBUS_STATE_INTERRUPT
                 mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_INTERRUPT;
             }

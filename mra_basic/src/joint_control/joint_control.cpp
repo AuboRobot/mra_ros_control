@@ -79,7 +79,7 @@ void joint_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
         for(int i=0; i<jointID.size(); i++) {
             bool isSent = userControlOnCan->setJointTagPos(jointID[i],msg->command[i]);
             if (isSent==false) {
-                ROS_ERROR("Sent is failure");
+                ROS_ERROR("Senting is failure in ID:%d",jointID[i]);
                 //set canbus state = CANBUS_STATE_INTERRUPT
                 mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_INTERRUPT;
             }
