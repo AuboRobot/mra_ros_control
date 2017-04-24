@@ -1,0 +1,146 @@
+mra7a:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Mode controllers used to switch between control methods ----------------------------
+  position_joint_mode_controller:
+    type: joint_mode_controller/JointModeController
+    joint_mode: 1 # position
+
+  velocity_joint_mode_controller:
+    type: joint_mode_controller/JointModeController
+    joint_mode: 2 # velocity
+
+  # Position - Right and Left Joint Position Trajectory Controllers -------------------
+  arm_trajectory_controller:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - lJoint1
+      - lJoint2
+      - lJoint3
+      - lJoint4
+      - lJoint5
+      - lJoint6
+      - lJoint7
+      - rJoint1
+      - rJoint2
+      - rJoint3
+      - rJoint4
+      - rJoint5
+      - rJoint6
+      - rJoint7
+
+    constraints:
+      goal_time: 2.0                   # Defaults to zero
+      stopped_velocity_tolerance: 0.1 # Defaults to 0.01
+      lJoint1:
+        trajectory: 0 
+        goal: 0.2       
+      lJoint2:
+        trajectory: 0 
+        goal: 0.2       
+      lJoint3:
+        trajectory: 0 
+        goal: 0.2       
+      lJoint4:
+        trajectory: 0 
+        goal: 0.2       
+      lJoint5:
+        trajectory: 0 
+        goal: 0.2       
+      lJoint6:
+        trajectory: 0 
+        goal: 0.2       
+      lJoint7:
+        trajectory: 0 
+        goal: 0.2       
+      rJoint1:
+        trajectory: 0 
+        goal: 0.2       
+      rJoint2:
+        trajectory: 0 
+        goal: 0.2       
+      rJoint3:
+        trajectory: 0 
+        goal: 0.2       
+      rJoint4:
+        trajectory: 0 
+        goal: 0.2       
+      rJoint5:
+        trajectory: 0 
+        goal: 0.2       
+      Joint6:
+        trajectory: 0 
+        goal: 0.2       
+      rJoint7:
+        trajectory: 0 
+        goal: 0.2       
+
+    state_publish_rate:  50 # Defaults to 50
+    action_monitor_rate: 20 # Defaults to 20
+    #hold_trajectory_duration: 0 # Defaults to 0.5
+
+
+
+  # Position Controllers ---------------------------------------
+  ljoint1_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lJoint1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  ljoint2_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lJoint2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  ljoint3_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lJoint3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  ljoint4_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lJoint4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  ljoint5_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lJoint5
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  ljoint6_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lJoint6
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  ljoint7_position_controller:
+    type: position_controllers/JointPositionController
+    joint: lJoint7
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rjoint1_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rJoint1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rjoint2_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rJoint2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rjoint3_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rJoint3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rjoint4_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rJoint4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rjoint5_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rJoint5
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rjoint6_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rJoint6
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rjoint7_position_controller:
+    type: position_controllers/JointPositionController
+    joint: rJoint7
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
