@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(mra_joint_state_publisher)
 
+#support C++11
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++0x")
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  std_msgs roscpp mra_core_msgs
+  std_msgs roscpp mra_core_msgs mra_basic
 )
 
 ## System dependencies are found with CMake's conventions
@@ -100,7 +103,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES mra_joint_state_publisher
-  CATKIN_DEPENDS std_msgs mra_core_msgs
+  CATKIN_DEPENDS std_msgs mra_core_msgs mra_basic
 #  DEPENDS system_lib
 )
 
