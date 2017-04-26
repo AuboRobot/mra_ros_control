@@ -19,7 +19,14 @@ const std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","
 #define RESET_MRA_API_TOPIC "/mra/reset_MRA_API"    //-->sub, When canbus interrupts, we need to reset MRA_API after reconnecting the usb-can.
 
 
-
+/*Position controll topic*/
+#define JOINT1_POSITION_CONTROLLER "/mra7a/joint1_position_controller/command"
+#define JOINT2_POSITION_CONTROLLER "/mra7a/joint2_position_controller/command"
+#define JOINT3_POSITION_CONTROLLER "/mra7a/joint3_position_controller/command"
+#define JOINT4_POSITION_CONTROLLER "/mra7a/joint4_position_controller/command"
+#define JOINT5_POSITION_CONTROLLER "/mra7a/joint5_position_controller/command"
+#define JOINT6_POSITION_CONTROLLER "/mra7a/joint6_position_controller/command"
+#define JOINT7_POSITION_CONTROLLER "/mra7a/joint7_position_controller/command"
 
 /*For Dual Arms*/
 const bool isDualArm = false;//When you using dual arms, please set the value to true.
