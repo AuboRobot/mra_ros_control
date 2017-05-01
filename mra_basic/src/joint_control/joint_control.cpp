@@ -86,6 +86,22 @@ void joint_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
         }
     }
 }
+void moveJ_callback(const std_msgs::Float32MultiArray::ConstPtr &msg)
+{
+    ROS_INFO("[%f,%f,%f,%f,%f,%f,%f]",
+             msg->data[0],msg->data[1],msg->data[2],msg->data[3],msg->data[4],msg->data[5],msg->data[6]);
+
+    if(mra_state.canbus_state==mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL) {
+        for(int i=0; i<7; i++) {
+            bool isSent = userControlOnCan->setJointTagPos(jointID[i],msg->data[i]);
+            if (isSent==false) {
+                ROS_ERROR("Senting is failure in ID:%d",jointID[i]);
+                //set canbus state = CANBUS_STATE_INTERRUPT
+                mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_INTERRUPT;
+            }
+        }
+    }
+}
 
 void MRA_API_INIT(const std_msgs::Bool &reset) {
 
@@ -125,6 +141,8 @@ int main(int argc, char **argv)
 
     /*sub other node's joint control command*/
     ros::Subscriber sub_joint_command = n.subscribe(JOINT_COMMAND_TOPIC, 1, &joint_command_callback);
+    /*sub the simple position control command, android app will send the topic*/
+    ros::Subscriber sub_moveJ = n.subscribe(JOINT_POSITION_COMMAND_TOPIC, 20, &moveJ_callback);
     /*pub joint state*/
     ros::Publisher joint_state_pub = n.advertise<sensor_msgs::JointState> (JOINT_STATE_TOPIC, 1000);
     /*pub mra's state, such as whether canbus is normal or not*/
