@@ -1,0 +1,6 @@
+Using the joint_state_publisher GUI to control real mra7a's joint separately.
+Running steps:
+1.roslaunch mra7a_moveit_config demo_gui_no_rviz.launch
+2.rosrun mra_joint_state_publisher_control joint_state_publisher_control
+3.rosrun mra_basic joint_control
+

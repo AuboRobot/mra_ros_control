@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <name>mra_joint_state_publisher_control</name>
+  <version>0.1.0</version>
+  <description>The mra_joint_state_publisher_control package is used to control mra joints by subscribing the "/joint_state" topic published by starting demo.launch</description>
+
+  <maintainer email="mengnanli@aliyun.com">LMN</maintainer>
+  <license>BSD</license>
+  <author email="mengnanli@aliyun.com">LMN</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>moveit_core</build_depend>
+  <build_depend>moveit_ros_planning_interface</build_depend>
+  <build_depend>moveit_ros_perception</build_depend>
+  <build_depend>interactive_markers</build_depend>
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>mra_basic</build_depend>
+  <build_depend>mra_core_msgs</build_depend>
+
+  <run_depend>moveit_core</run_depend>
+  <run_depend>moveit_fake_controller_manager</run_depend>
+  <run_depend>moveit_ros_planning_interface</run_depend>
+  <run_depend>moveit_ros_perception</run_depend>
+  <run_depend>interactive_markers</run_depend>
+  <run_depend>mra_basic</run_depend>
+  <run_depend>mra_core_msgs</run_depend>
+</package>

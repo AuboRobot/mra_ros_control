@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find our_moveit_config)/launch/demo.launch"/>
+
+  <node name="rviz_subscribe" pkg="our_robot" type="rviz_subscribe" respawn="false" output="screen">
+  </node>
+
+</launch>
