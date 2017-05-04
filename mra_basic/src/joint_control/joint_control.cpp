@@ -42,11 +42,13 @@
 #include <mra_core_msgs/AssemblyState.h>
 #include <mra_core_msgs/JointCommand.h>
 #include <std_msgs/Bool.h>
+#include <std_msgs/Int8.h>
 
 using namespace mra_basic_config;
 using namespace std;
 
 UserControlOnCan *userControlOnCan;
+Gripper *gripper;
 mra_core_msgs::AssemblyState mra_state;
 
 void show_ID_in_current_canbus()
@@ -103,6 +105,14 @@ void moveJ_callback(const std_msgs::Float32MultiArray::ConstPtr &msg)
     }
 }
 
+void gripper_command_callback(const std_msgs::Int8ConstPtr &msg){
+    if(gripper != NULL){
+        ROS_INFO("Gripper work on %d", msg->data);
+        gripper->setFingerTagOpenStatus(msg->data);
+    }
+
+}
+
 void MRA_API_INIT(const std_msgs::Bool &reset) {
 
     userControlOnCan = new UserControlOnCan();
@@ -117,6 +127,9 @@ void MRA_API_INIT(const std_msgs::Bool &reset) {
         std::string s;
         userControlOnCan->controller.GetErrorText(s);
         ROS_ERROR("Can't Open the pcanusb32:%s",s.c_str());
+    }
+    if(userControlOnCan->controller.allGripper.size() != 0){
+        gripper = userControlOnCan->findGripperID(mra_basic_config::GRIPPER_ID);
     }
 }
 
@@ -149,6 +162,8 @@ int main(int argc, char **argv)
     ros::Publisher state_pub = n.advertise<mra_core_msgs::AssemblyState> (STATE_TOPIC, 1);
     /*sub reset */
     ros::Subscriber sub_reset_MRA_API = n.subscribe(RESET_MRA_API_TOPIC, 10, &MRA_API_INIT);
+    /*sub gripper command*/
+    ros::Subscriber sub_gripper_command = n.subscribe(GRIPPER_COMMAND, 1, &gripper_command_callback);
 
 
     sensor_msgs::JointState joint_state;

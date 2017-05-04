@@ -1,0 +1,7 @@
+CMakeLists.txt.user
+qtbuild/
+.idea
+.idea/
+sender
+libIKOptimalHandler.so
+.DS_Store

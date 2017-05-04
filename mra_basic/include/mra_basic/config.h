@@ -8,6 +8,7 @@ namespace mra_basic_config {
 //const std::string DEFAULT_NODE = "/dev/pcanusb32"; //use:DEFAULT_NODE.c_str()
 #define DEFAULT_NODE "/dev/pcanusb32"
 const std::vector<int> jointID{21,22,23,24,25,26,27};
+const int GRIPPER_ID = 18;
 const std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
 
 #define CONTROL_RATE 100 //100HZ
@@ -18,7 +19,7 @@ const std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","
 #define JOINT_COMMAND_TOPIC "/mra/joint_command"    //-->sub joint control command
 #define JOINT_POSITION_COMMAND_TOPIC "/moveJ"    //-->sub joint control command
 #define RESET_MRA_API_TOPIC "/mra/reset_MRA_API"    //-->sub, When canbus interrupts, we need to reset MRA_API after reconnecting the usb-can.
-
+#define GRIPPER_COMMAND "/mra/gripper_command"
 
 /*Position controll topic*/
 #define JOINT1_POSITION_CONTROLLER "/mra7a/joint1_position_controller/command"
