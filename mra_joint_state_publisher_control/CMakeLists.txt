@@ -8,18 +8,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++0x")
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-        moveit_core
-        moveit_ros_planning
-        moveit_ros_planning_interface
-        cmake_modules
+
         mra_basic
         mra_core_msgs)
 
 
-
-#generate_messages(
- # DEPENDENCIES actionlib_msgs std_msgs 
-#)#action_server需要的# Or other packages containing msgs
 
 catkin_package(
 #  INCLUDE_DIRS include
@@ -40,5 +33,4 @@ ADD_EXECUTABLE(joint_state_publisher_control src/joint_state_publisher_control.c
 TARGET_LINK_LIBRARIES(joint_state_publisher_control ${catkin_LIBRARIES} ${libOURAPI_LIBS})
 add_dependencies(joint_state_publisher_control ${catkin_EXPORTED_TARGETS}) # don't build until necessary msgs are finish
 
-#ADD_EXECUTABLE(OUR_jointcontrol ${LIBJOINTCONTROL_SRC})
-#TARGET_LINK_LIBRARIES(OUR_jointcontrol ${LIBPCAN_LIB} -DNO_RT)
+

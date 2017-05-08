@@ -1,8 +1,8 @@
 #include "ros/ros.h"
 #include "std_msgs/Float32MultiArray.h"
-#include <moveit/move_group_interface/move_group.h>
 #include <mra_basic/config.h>
 #include <mra_core_msgs/JointCommand.h>
+#include <sensor_msgs/JointState.h>
 
 
 mra_core_msgs::JointCommand joints;
