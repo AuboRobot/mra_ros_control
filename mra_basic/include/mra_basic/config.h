@@ -7,9 +7,11 @@
 namespace mra_basic_config {
 //const std::string DEFAULT_NODE = "/dev/pcanusb32"; //use:DEFAULT_NODE.c_str()
 #define DEFAULT_NODE "/dev/pcanusb32"
-const std::vector<int> jointID{21,22,23,24,25,26,27};
-const int GRIPPER_ID = 18;
-const std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
+static std::string CAN_NODE_DEV = "/dev/pcanusb32";
+//const std::vector<int> jointID{21,22,23,24,25,26,27};
+static std::vector<int> jointID{1,2,3,4,5,6,7};
+static int GRIPPER_ID = 18;
+static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
 
 #define CONTROL_RATE 100 //100HZ
 

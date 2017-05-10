@@ -43,9 +43,56 @@
 #include <mra_core_msgs/JointCommand.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/Int8.h>
+#include <print_color/print_color.h>
 
 using namespace mra_basic_config;
 using namespace std;
+
+/**
+ * @brief get_param
+ * get param set in the basic_config.yaml
+ */
+void get_param()
+{
+    cout<<"------------------------------mra_basic config parameters------------------------------------------------------";
+
+    if(!ros::param::get("joint_names",joint_names)){
+        ROS_ERROR("no joint_names param!");
+        ros::shutdown();
+    }
+    cout<<endl<<"joint name: ";
+    for(int i; i<joint_names.size(); i++){
+        cout<<joint_names[i]<<" ";
+    }
+
+    if(!ros::param::get("jointID",jointID)){
+        ROS_ERROR("no jointID param!");
+        ros::shutdown();
+    }
+    cout<<endl<<Color_light_cyan<<"jointID: ";
+    for(int i; i<jointID.size(); i++){
+        cout<<jointID[i]<<" ";
+    }
+    cout<<Color_end;
+
+    if(!ros::param::get("GRIPPER_ID",GRIPPER_ID)){
+        ROS_ERROR("no GRIPPER_ID param!");
+        ros::shutdown();
+    }
+    cout<<endl<<Color_light_cyan<<"GRIPPER_ID: ";
+    cout<<GRIPPER_ID<<" ";
+    cout<<Color_end;
+
+    if(!ros::param::get("CAN_NODE_DEV",CAN_NODE_DEV)){
+        ROS_ERROR("no CAN_NODE_DEV param!");
+        ros::shutdown();
+    }
+    cout<<endl<<Color_light_cyan<<"CAN_NODE_DEV: ";
+    cout<<CAN_NODE_DEV<<" ";
+    cout<<Color_end;
+}
+
+
 
 UserControlOnCan *userControlOnCan;
 Gripper *gripper;
@@ -72,10 +119,10 @@ void show_ID_in_current_canbus()
 
 void joint_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
 {
-    for(int i=0; i<msg->command.size(); i++) {
-        std::cout<<msg->command[i]<<" || ";
-    }
-    std::cout<<std::endl;
+    //    for(int i=0; i<msg->command.size(); i++) {
+    //        std::cout<<msg->command[i]<<" || ";
+    //    }
+    //    std::cout<<std::endl;
 
     if(mra_state.canbus_state==mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL) {
         for(int i=0; i<jointID.size(); i++) {
@@ -90,8 +137,8 @@ void joint_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
 }
 void moveJ_callback(const std_msgs::Float32MultiArray::ConstPtr &msg)
 {
-    ROS_INFO("[%f,%f,%f,%f,%f,%f,%f]",
-             msg->data[0],msg->data[1],msg->data[2],msg->data[3],msg->data[4],msg->data[5],msg->data[6]);
+    //    ROS_INFO("[%f,%f,%f,%f,%f,%f,%f]",
+    //             msg->data[0],msg->data[1],msg->data[2],msg->data[3],msg->data[4],msg->data[5],msg->data[6]);
 
     if(mra_state.canbus_state==mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL) {
         for(int i=0; i<7; i++) {
@@ -116,7 +163,7 @@ void gripper_command_callback(const std_msgs::Int8ConstPtr &msg){
 void MRA_API_INIT(const std_msgs::Bool &reset) {
 
     userControlOnCan = new UserControlOnCan();
-    if(userControlOnCan->Init(DEFAULT_NODE)) {
+    if(userControlOnCan->Init(CAN_NODE_DEV)) {
         show_ID_in_current_canbus();
         mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL;
         mra_state.enabled = true;
@@ -138,6 +185,10 @@ int main(int argc, char **argv)
 
     ros::init(argc, argv, "joint_control");
     ros::NodeHandle n;
+
+    sleep(1);
+    get_param();
+
     ros::Rate loop_rate(CONTROL_RATE);//default 100Hz
 
     /*mra's state information*/

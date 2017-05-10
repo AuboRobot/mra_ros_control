@@ -7,8 +7,11 @@
 <node name="mra_joint_control" pkg="mra_basic" type="joint_control" respawn="false"
 	  launch-prefix="gnome-terminal -e"/>
 -->
-<!--control the real MRA by canbus.-->
-<node name="mra_joint_control" pkg="mra_basic" type="joint_control" respawn="false"/>
+
+    <!-- Load mra_basic configurations from YAML file to parameter server -->
+    <rosparam file="$(find mra_basic)/config/basic_config.yaml" command="load" />
+    <!--control the real MRA by canbus.-->
+    <node name="mra_joint_control" pkg="mra_basic" type="joint_control" respawn="false" output="screen"/>
 
 
     <!-- GDB functionality -->

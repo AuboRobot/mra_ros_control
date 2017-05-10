@@ -1,0 +1,19 @@
+
+joint_names: 
+  - Joint1
+  - Joint2
+  - Joint3
+  - Joint4
+  - Joint5
+  - Joint6
+  - Joint7
+jointID:
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+GRIPPER_ID: 18
+CAN_NODE_DEV: /dev/pcanusb32
