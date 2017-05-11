@@ -163,7 +163,7 @@ void gripper_command_callback(const std_msgs::Int8ConstPtr &msg){
 void MRA_API_INIT(const std_msgs::Bool &reset) {
 
     userControlOnCan = new UserControlOnCan();
-    if(userControlOnCan->Init(CAN_NODE_DEV)) {
+    if(userControlOnCan->Init(CAN_NODE_DEV.c_str())) {
         show_ID_in_current_canbus();
         mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL;
         mra_state.enabled = true;
