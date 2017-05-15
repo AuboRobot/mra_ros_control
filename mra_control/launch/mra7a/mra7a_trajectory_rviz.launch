@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <include file="$(find mra_control)/launch/mra7a/mra7a_hw_trajectory_bingup.launch">
+  </include>
+
+  <include file="$(find mra7a_gazebo)/launch/mra7a_bringup_rviz.launch">
+  </include>
+
+
+</launch>
