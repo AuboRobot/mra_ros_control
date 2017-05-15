@@ -44,6 +44,7 @@
 #include <std_msgs/Bool.h>
 #include <std_msgs/Int8.h>
 #include <print_color/print_color.h>
+#include <vector>
 
 using namespace mra_basic_config;
 using namespace std;
@@ -54,42 +55,43 @@ using namespace std;
  */
 void get_param()
 {
-    cout<<"------------------------------mra_basic config parameters------------------------------------------------------";
+    cout<<"------------------------------mra_basic config parameters------------------------------------------------------"<<std::endl;
 
     if(!ros::param::get("joint_names",joint_names)){
-        ROS_ERROR("no joint_names param!");
-        ros::shutdown();
+        ROS_WARN("no joint_names param!, using default!");
+        //ros::shutdown();
     }
-    cout<<endl<<"joint name: ";
+    cout<<"joint name: ";
     for(int i; i<joint_names.size(); i++){
         cout<<joint_names[i]<<" ";
     }
+    cout<<endl;
+    /*Don't get the jointID and GRIPPERID params from yaml, get them from canbus*/
+//    if(!ros::param::get("jointID",jointID)){
+//        ROS_ERROR("no jointID param!");
+//        ros::shutdown();
+//    }
+//    cout<<endl<<Color_light_cyan<<"jointID: ";
+//    for(int i; i<jointID.size(); i++){
+//        cout<<jointID[i]<<" ";
+//    }
+//    cout<<Color_end;
 
-    if(!ros::param::get("jointID",jointID)){
-        ROS_ERROR("no jointID param!");
-        ros::shutdown();
-    }
-    cout<<endl<<Color_light_cyan<<"jointID: ";
-    for(int i; i<jointID.size(); i++){
-        cout<<jointID[i]<<" ";
-    }
-    cout<<Color_end;
-
-    if(!ros::param::get("GRIPPER_ID",GRIPPER_ID)){
-        ROS_ERROR("no GRIPPER_ID param!");
-        ros::shutdown();
-    }
-    cout<<endl<<Color_light_cyan<<"GRIPPER_ID: ";
-    cout<<GRIPPER_ID<<" ";
-    cout<<Color_end;
+//    if(!ros::param::get("GRIPPER_ID",GRIPPER_ID)){
+//        ROS_ERROR("no GRIPPER_ID param!");
+//        ros::shutdown();
+//    }
+//    cout<<endl<<Color_light_cyan<<"GRIPPER_ID: ";
+//    cout<<GRIPPER_ID<<" ";
+//    cout<<Color_end;
 
     if(!ros::param::get("CAN_NODE_DEV",CAN_NODE_DEV)){
-        ROS_ERROR("no CAN_NODE_DEV param!");
-        ros::shutdown();
+        ROS_WARN("no CAN_NODE_DEV param!, using default!");
+        //ros::shutdown();
     }
-    cout<<endl<<Color_light_cyan<<"CAN_NODE_DEV: ";
+    cout<<Color_light_cyan<<"CAN_NODE_DEV: ";
     cout<<CAN_NODE_DEV<<" ";
-    cout<<Color_end;
+    cout<<endl<<Color_end;
 }
 
 
@@ -98,21 +100,34 @@ UserControlOnCan *userControlOnCan;
 Gripper *gripper;
 mra_core_msgs::AssemblyState mra_state;
 
-void show_ID_in_current_canbus()
+void copy_ID_in_current_canbus()
 {
+    jointID.clear();
     cout << "Joint ID in CANBUS:";
     for (std::vector<Joint>::iterator iter = userControlOnCan->controller.allJoint.begin();
          iter != userControlOnCan->controller.allJoint.end();
          ++iter) {
         cout << " --- " << iter.base()->ID;
+        jointID.push_back(iter.base()->ID);
     }
     cout << endl;
+
+    cout<<Color_light_cyan<< "Sort Joint ID:";
+    std::sort(jointID.begin(),jointID.end());
+    for (std::vector<int>::iterator iter = jointID.begin();
+         iter != jointID.end();
+         ++iter) {
+        cout << " --- " << *iter;
+    }
+    cout <<Color_end<< endl;
+
 
     cout << "Finger ID in CANBUS:";
     for (std::vector<Gripper>::iterator iter = userControlOnCan->controller.allGripper.begin();
          iter != userControlOnCan->controller.allGripper.end();
          ++iter) {
         cout << " --- " << iter.base()->ID;
+        GRIPPER_ID = iter.base()->ID;
     }
     cout << endl;
 }
@@ -164,7 +179,7 @@ void MRA_API_INIT(const std_msgs::Bool &reset) {
 
     userControlOnCan = new UserControlOnCan();
     if(userControlOnCan->Init(CAN_NODE_DEV.c_str())) {
-        show_ID_in_current_canbus();
+        copy_ID_in_current_canbus();
         mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL;
         mra_state.enabled = true;
         for(int i=0; i<jointID.size(); i++) {

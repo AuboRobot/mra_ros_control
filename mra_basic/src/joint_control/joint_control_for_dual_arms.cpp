@@ -50,7 +50,7 @@ UserControlOnCan *left_arm_dev;
 UserControlOnCan *right_arm_dev;
 mra_core_msgs::AssemblyState mra_state;
 
-void show_ID_in_current_canbus()
+void copy_ID_in_current_canbus()
 {
     cout << "Joint ID in left arm CANBUS:";
     for (std::vector<Joint>::iterator iter = left_arm_dev->controller.allJoint.begin();
@@ -149,7 +149,7 @@ void MRA_API_INIT(const std_msgs::Bool &reset) {
             ROS_ERROR("Can't Open the R_ARM_DEV:%s",s.c_str());
         }
         if(ok == 2) {
-            show_ID_in_current_canbus();
+            copy_ID_in_current_canbus();
 
             mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL;
             mra_state.enabled = true;

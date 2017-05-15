@@ -19,7 +19,6 @@ find_package(catkin REQUIRED COMPONENTS
     joint_limits_interface
     trajectory_msgs
     moveit_msgs
-    moveit_visual_tools
     mra_basic#config.h
 )
 

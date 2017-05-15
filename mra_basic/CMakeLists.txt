@@ -14,7 +14,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++0x")
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  rospy
   std_msgs
   mra_core_msgs
 
@@ -175,7 +174,7 @@ include_directories(include ${catkin_INCLUDE_DIRS} )
 SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 message(STATUS " CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH}")
 
-add_subdirectory(src/control_panel)
+#add_subdirectory(src/control_panel)
 add_subdirectory(src/joint_control)
 
 
