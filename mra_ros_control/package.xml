@@ -15,7 +15,6 @@
   <run_depend>mra_core_msgs</run_depend>
   <run_depend>mra_joint_state_publisher</run_depend>
   <run_depend>mra_joint_state_publisher_control</run_depend>
-  <run_depend>mra_ros_control</run_depend>
   <run_depend>ros_control</run_depend>
   <run_depend>ros_controllers</run_depend>
 
