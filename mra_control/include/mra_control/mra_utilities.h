@@ -58,8 +58,6 @@
 #include <moveit_msgs/MoveGroupGoal.h>
 #include <moveit_msgs/MoveGroupAction.h>
 
-// Visualization
-#include <moveit_visual_tools/moveit_visual_tools.h>
 
 namespace mra_control
 {

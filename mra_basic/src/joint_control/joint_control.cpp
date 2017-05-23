@@ -192,6 +192,7 @@ void MRA_API_INIT(const std_msgs::Bool &reset) {
     }
     if(userControlOnCan->controller.allGripper.size() != 0){
         gripper = userControlOnCan->findGripperID(mra_basic_config::GRIPPER_ID);
+        gripper->setFingerLimTorque(450);
     }
 }
 

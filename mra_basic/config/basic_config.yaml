@@ -15,5 +15,5 @@ jointID:
   - 25
   - 26
   - 27
-GRIPPER_ID: 8
+GRIPPER_ID: 18
 CAN_NODE_DEV: /dev/pcanusb32
