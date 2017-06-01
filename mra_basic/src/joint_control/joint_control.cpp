@@ -43,57 +43,10 @@
 #include <mra_core_msgs/JointCommand.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/Int8.h>
-#include <print_color/print_color.h>
 #include <vector>
 
 using namespace mra_basic_config;
 using namespace std;
-
-/**
- * @brief get_param
- * get param set in the basic_config.yaml
- */
-void get_param()
-{
-    cout<<"------------------------------mra_basic config parameters------------------------------------------------------"<<std::endl;
-
-    if(!ros::param::get("joint_names",joint_names)){
-        ROS_WARN("no joint_names param!, using default!");
-        //ros::shutdown();
-    }
-    cout<<"joint name: ";
-    for(int i; i<joint_names.size(); i++){
-        cout<<joint_names[i]<<" ";
-    }
-    cout<<endl;
-    /*Don't get the jointID and GRIPPERID params from yaml, get them from canbus*/
-//    if(!ros::param::get("jointID",jointID)){
-//        ROS_ERROR("no jointID param!");
-//        ros::shutdown();
-//    }
-//    cout<<endl<<Color_light_cyan<<"jointID: ";
-//    for(int i; i<jointID.size(); i++){
-//        cout<<jointID[i]<<" ";
-//    }
-//    cout<<Color_end;
-
-//    if(!ros::param::get("GRIPPER_ID",GRIPPER_ID)){
-//        ROS_ERROR("no GRIPPER_ID param!");
-//        ros::shutdown();
-//    }
-//    cout<<endl<<Color_light_cyan<<"GRIPPER_ID: ";
-//    cout<<GRIPPER_ID<<" ";
-//    cout<<Color_end;
-
-    if(!ros::param::get("CAN_NODE_DEV",CAN_NODE_DEV)){
-        ROS_WARN("no CAN_NODE_DEV param!, using default!");
-        //ros::shutdown();
-    }
-    cout<<Color_light_cyan<<"CAN_NODE_DEV: ";
-    cout<<CAN_NODE_DEV<<" ";
-    cout<<endl<<Color_end;
-}
-
 
 
 UserControlOnCan *userControlOnCan;

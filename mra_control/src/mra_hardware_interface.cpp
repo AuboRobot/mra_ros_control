@@ -38,7 +38,6 @@
 */
 
 #include <mra_control/mra_hardware_interface.h>
-#include <print_color/print_color.h>
 #include <mra_basic/config.h>
 
 namespace mra_control
@@ -48,6 +47,7 @@ MRAHardwareInterface::MRAHardwareInterface():
     joint_mode_(1),
     loop_hz_(100)
 {
+    mra_basic_config::get_param();
 
     if(mra_basic_config::isDualArm){
         ROS_INFO("\033[22;34m[hardware_interface]: Reset dual arms' hardware' %s",Color_end);
