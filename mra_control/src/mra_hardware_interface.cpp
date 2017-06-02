@@ -47,7 +47,6 @@ MRAHardwareInterface::MRAHardwareInterface():
     joint_mode_(1),
     loop_hz_(100)
 {
-    mra_basic_config::get_param();
 
     if(mra_basic_config::isDualArm){
         ROS_INFO("\033[22;34m[hardware_interface]: Reset dual arms' hardware' %s",Color_end);
@@ -204,6 +203,7 @@ int main(int argc, char** argv)
     spinner.start();
 
     ros::NodeHandle nh;//node registration
+    mra_basic_config::get_param();
 
     mra_control::MRAHardwareInterface *mra = new mra_control::MRAHardwareInterface();
 
