@@ -203,6 +203,8 @@ int main(int argc, char** argv)
     spinner.start();
 
     ros::NodeHandle nh;//node registration
+    sleep(1);
+    ROS_INFO("mra_control: get_param !!!");
     mra_basic_config::get_param();
 
     mra_control::MRAHardwareInterface *mra = new mra_control::MRAHardwareInterface();

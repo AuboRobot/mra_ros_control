@@ -11,8 +11,7 @@
     <!-- Load mra_basic configurations from YAML file to parameter server -->
     <rosparam file="$(find mra_basic)/config/basic_config.yaml" command="load" />
     <!--control the real MRA by canbus.-->
-    <node name="mra_joint_control" pkg="mra_basic" type="joint_control" respawn="false" output="screen"/>
-
+    <node name="mra_joint_control" pkg="mra_basic" type="joint_control" respawn="false" output="screen" ns="mra7a"/>
 
     <!-- GDB functionality -->
     <arg name="debug" default="false" />
@@ -36,8 +35,10 @@
 
     <!-- Load hardware interface-->
     <node name="mra_hardware_interface" pkg="mra_control" type="mra_hardware_interface"
-	  respawn="false" output="screen" ns="mra7a"  launch-prefix="$(arg launch_prefix)"> 
+	  respawn="false" output="screen" ns="mra7a"> 
     </node>
+
+
 
 
 
