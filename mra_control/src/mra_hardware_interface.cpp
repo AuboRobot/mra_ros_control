@@ -38,7 +38,6 @@
 */
 
 #include <mra_control/mra_hardware_interface.h>
-#include <print_color/print_color.h>
 #include <mra_basic/config.h>
 
 namespace mra_control
@@ -204,6 +203,7 @@ int main(int argc, char** argv)
     spinner.start();
 
     ros::NodeHandle nh;//node registration
+    mra_basic_config::get_param();
 
     mra_control::MRAHardwareInterface *mra = new mra_control::MRAHardwareInterface();
 

@@ -34,7 +34,7 @@
   <run_depend>hardware_interface</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <run_depend>joint_limits_interface</run_depend>
-  <run_depend>mra_description</run_depend>
+  <run_depend>mra7a_description</run_depend>
   <run_depend>trajectory_msgs</run_depend>
   <run_depend>moveit_msgs</run_depend>
   <run_depend>mra_basic</run_depend>

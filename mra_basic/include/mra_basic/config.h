@@ -3,16 +3,17 @@
 
 #include <iostream>
 #include <vector>
+#include <print_color/print_color.h>
+using namespace std;
 
 namespace mra_basic_config {
 //const std::string DEFAULT_NODE = "/dev/pcanusb32"; //use:DEFAULT_NODE.c_str()
-#define DEFAULT_NODE "/dev/pcanusb32"
 static std::string CAN_NODE_DEV = "/dev/pcanusb32";
-//const std::vector<int> jointID{21,22,23,24,25,26,27};
-static std::vector<int> jointID{1,2,3,4,5,6,7};
-static int GRIPPER_ID = 18;
+//static std::vector<int> jointID{1,2,3,4,5,6,7};
+static std::vector<int> jointID;
+static int GRIPPER_ID = -1;
 static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
-
+//static std::vector<std::string> joint_names;
 #define CONTROL_RATE 100 //100HZ
 
 /*Topic name definition*/
@@ -44,6 +45,34 @@ const std::vector<std::string> L_joint_names{"lJoint1","lJoint2","lJoint3","lJoi
 
 #define L_ARM_COMMAND_TOPIC "/mra/L_ARM/joint_command"    //-->sub joint control command
 #define R_ARM_COMMAND_TOPIC "/mra/R_ARM/joint_command"    //-->sub joint control command
+
+
+/**
+ * @brief get_param
+ * get param set in the basic_config.yaml
+ */
+void get_param()
+{
+    cout<<"------------------------------mra_basic config parameters------------------------------------------------------"<<std::endl;
+
+    if(!ros::param::get("joint_names",joint_names)){
+        ROS_WARN("no joint_names param!, using default!");
+        //ros::shutdown();
+    }
+    cout<<"joint name: ";
+    for(int i; i<joint_names.size(); i++){
+        cout<<joint_names[i]<<" ";
+    }
+    cout<<endl;
+
+    if(!ros::param::get("CAN_NODE_DEV",CAN_NODE_DEV)){
+        ROS_WARN("no CAN_NODE_DEV param!, using default!");
+        //ros::shutdown();
+    }
+    cout<<Color_light_cyan<<"CAN_NODE_DEV: ";
+    cout<<CAN_NODE_DEV<<" ";
+    cout<<endl<<Color_end;
+}
 
 }
 
