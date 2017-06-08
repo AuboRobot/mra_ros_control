@@ -156,7 +156,7 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
 
     sleep(1);
-    get_param();
+    get_param(n);
 
     ros::Rate loop_rate(CONTROL_RATE);//default 100Hz
 

@@ -1,5 +1,7 @@
 mra7a:
-  joint_names: 
+  CAN_NODE_DEV: /dev/pcanusb32
+
+  joint_names:
     - Joint1
     - Joint2
     - Joint3
@@ -7,4 +9,3 @@ mra7a:
     - Joint5
     - Joint6
     - Joint7
-  CAN_NODE_DEV: /dev/pcanusb32
