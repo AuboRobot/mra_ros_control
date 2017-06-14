@@ -13,7 +13,7 @@ static std::string CAN_NODE_DEV = "/dev/pcanusb32";
 static std::vector<int> jointID;
 static int GRIPPER_ID = -1;
 //static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
-static std::vector<std::string> joint_names;
+std::vector<std::string> joint_names;
 #define CONTROL_RATE 100 //100HZ
 
 /*Topic name definition*/
@@ -51,16 +51,16 @@ const std::vector<std::string> L_joint_names{"lJoint1","lJoint2","lJoint3","lJoi
  * @brief get_param
  * get param set in the basic_config.yaml
  */
-void get_param()
+void get_param(ros::NodeHandle &nh)
 {
     cout<<"------------------------------mra_basic config parameters------------------------------------------------------"<<std::endl;
 
-    if(!ros::param::get("joint_names",joint_names)){
+    if(!nh.getParam("joint_names",joint_names)){
         ROS_WARN("no joint_names param!, using default!");
         //ros::shutdown();
     }
     cout<<"joint name: ";
-    for(int i; i<joint_names.size(); i++){
+    for(int i=0; i<joint_names.size(); i++){
         cout<<joint_names[i]<<" ";
     }
     cout<<endl;

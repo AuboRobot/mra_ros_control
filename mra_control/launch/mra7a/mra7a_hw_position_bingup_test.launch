@@ -3,6 +3,9 @@
 
  <!-- <group ns="robot"> -->
 
+    <!-- Load mra_basic configurations from YAML file to parameter server -->
+    <rosparam file="$(find mra_basic)/config/basic_config.yaml" command="load" />
+
     <!-- GDB functionality -->
     <arg name="debug" default="false" />
     <arg unless="$(arg debug)" name="launch_prefix" value="" />
