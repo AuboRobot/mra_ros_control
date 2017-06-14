@@ -7,4 +7,4 @@ mra7a:
     - Joint5
     - Joint6
     - Joint7
-  CAN_NODE_DEV: /dev/pcanusb32
+  CAN_NODE_DEV: /dev/pcan32
