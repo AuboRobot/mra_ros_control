@@ -30,7 +30,8 @@ Indigo | Kinetic
 ## Prerequisites
 * A kind of MRA description with moveit configure.(If you need to plan to control the mra.) For example [mra7a](https://github.com/auboROS/mra7a).
 * A real MRA and gripper(Optional).
-* [ROS Indigo](http://wiki.ros.org/ROS/Installation) on (suggested) Ubuntu 14.04, or ROS Kinetic on Ubuntu 16.04 (under development)
+* [ROS Indigo](http://wiki.ros.org/ROS/Installation) on (recommended) Ubuntu 14.04 of 32 bit or 64bit, or ROS Kinetic on Ubuntu 16.04 (under development)
+   These packages may work with other configurations as well, but they have only been tested for the one recommended above.
 * [MoveIt!](http://moveit.ros.org/install/): sudo apt-get install ros-<indigo\>-moveit
 
 ## Using instruction
