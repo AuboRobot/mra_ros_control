@@ -61,7 +61,7 @@ Indigo | Kinetic
     * Control single joint by ros_control.
      
             roslaunch mra_control mra7a_hw_position_bingup.launch
-            rostopic pub /mra/joint7_command std_msg/Float64 1.5 //control the seventh joint move 1.5 radio.
+            rostopic pub /mra7a/joint7_position_controller/command std_msgs/Float64 1.5 //control the seventh joint move 1.5 radio.
                
     * Control the whole arm by planning.
     
