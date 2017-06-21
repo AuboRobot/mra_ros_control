@@ -33,6 +33,7 @@ Indigo | Kinetic
 * [ROS Indigo](http://wiki.ros.org/ROS/Installation) on (recommended) Ubuntu 14.04 of 32 bit or 64bit, or ROS Kinetic on Ubuntu 16.04 (under development)
    These packages may work with other configurations as well, but they have only been tested for the one recommended above.
 * [MoveIt!](http://moveit.ros.org/install/): sudo apt-get install ros-<indigo\>-moveit
+* [peak-can-linux-driver](https://github.com/auboROS/peak-linux-driver)
 
 ## Using instruction
 * Create a catkin workspace if you don't already have one (we recommend a separate one for MRA)
