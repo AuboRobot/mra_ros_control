@@ -1,6 +1,7 @@
 #ifndef CONFIG_H_
-#define CONFIG_H_
+#define CONFIG_H_ 1
 
+#include "ros/ros.h"
 #include <iostream>
 #include <vector>
 #include <print_color/print_color.h>
@@ -9,11 +10,10 @@ using namespace std;
 namespace mra_basic_config {
 //const std::string DEFAULT_NODE = "/dev/pcanusb32"; //use:DEFAULT_NODE.c_str()
 static std::string CAN_NODE_DEV = "/dev/pcanusb32";
-//static std::vector<int> jointID{1,2,3,4,5,6,7};
-static std::vector<int> jointID;
+static std::vector<int> jointID; //read all joint id from CAN BUS
 static int GRIPPER_ID = -1;
-//static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
-std::vector<std::string> joint_names;
+static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
+//std::vector<std::string> joint_names;
 #define CONTROL_RATE 100 //100HZ
 
 /*Topic name definition*/
@@ -50,15 +50,21 @@ const std::vector<std::string> L_joint_names{"lJoint1","lJoint2","lJoint3","lJoi
 /**
  * @brief get_param
  * get param set in the basic_config.yaml
+ * Note:using inline is helpful to avoid multiple define in complile both joint_control and control_panel.
  */
-void get_param(ros::NodeHandle &nh)
+inline void get_param(ros::NodeHandle &nh)
 {
-    cout<<"------------------------------mra_basic config parameters------------------------------------------------------"<<std::endl;
+    cout<<"---------------------------mra_basic config parameters--------------------------"<<std::endl;
 
-    if(!nh.getParam("joint_names",joint_names)){
+    if(nh.hasParam("joint_names")){
+        joint_names.resize(0);
+        if(!nh.getParam("joint_names",joint_names)){
+            ROS_WARN("can't get <joint_names> param !!!");
+        }
+    }else {
         ROS_WARN("no joint_names param!, using default!");
-        //ros::shutdown();
     }
+
     cout<<"joint name: ";
     for(int i=0; i<joint_names.size(); i++){
         cout<<joint_names[i]<<" ";

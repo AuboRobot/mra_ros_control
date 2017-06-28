@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include "ros/ros.h"
 #include <std_msgs/Float32MultiArray.h>
-#include "mra_api.h"
+#include <mra_basic/config.h>
+
 
 namespace Ui {
 class MainWindow;

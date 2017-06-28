@@ -2,9 +2,9 @@
 #include <QApplication>
 #include <pthread.h>
 #include <mra_core_msgs/JointCommand.h>
-#include <mra_basic/config.h>
 #include <sensor_msgs/JointState.h>
 
+using namespace mra_basic_config;
 std::vector<double> joints_init;
 bool get_joints_init_position;
 extern bool start_sending_joint_command;

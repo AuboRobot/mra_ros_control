@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <math.h>
-#include <mra_basic/config.h>
 #include <vector>
 #include <QTime>
 
