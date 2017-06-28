@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     start_sending_joint_command = false;
 
-    joints.resize(mra_basic_config::jointID.size());
+    joints.resize(7);
     while(get_joints_init_position == false) {
         delaymsec(500);
     }
