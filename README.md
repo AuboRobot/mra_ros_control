@@ -87,7 +87,7 @@ Indigo | Kinetic
 
 * Test: control the MRA7 for the random motion.<br>
 		
-	    roslaunch mra7a_random_motion mra7a_random_motion.launch<br>
+	    roslaunch mra7a_random_motion mra7a_random_motion.launch
 
 	
 	
