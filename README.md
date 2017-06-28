@@ -46,6 +46,9 @@ Indigo | Kinetic
 
         cd ~/ros_ws/mra_ros_ws/src  
         git clone https://github.com/auboROS/mra_ros_control.git
+        git clone https://github.com/auboROS/mra7a.git
+        git clone https://github.com/auboROS/mra7a_tutorials.git
+        
         
 * Compiling
 
@@ -68,7 +71,7 @@ Indigo | Kinetic
     
             roslaunch mra_control mra7a_trajectory_rviz.launch 
             
-    * Contorl single joint by QT control panel.(You need install [QT](http://download.qt.io/archive/qt/))<br>
+    * Contorl single joint by QT control panel.(You need install [QT](http://download.qt.io/archive/qt/). So, you totally can save your time to skip the test.)<br>
         In the mra_basic/src/control_panel/CMakeLists.txt
     
             set(CMAKE_PREFIX_PATH "/home/lmn/Qt5.3.2/5.3/gcc/lib/cmake") //Set your QT path.
@@ -82,7 +85,8 @@ Indigo | Kinetic
             second terminal: rosrun mra_basic joint_control
             third terminal: rosrun mra_basic control_panel
 
-
+* Test: control the MRA7 for the random motion.<br>
+		roslaunch mra7a_random_motion mra7a_random_motion.launch<br>
 
 	
 	
