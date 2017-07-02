@@ -52,7 +52,7 @@ Indigo | Kinetic
 * Compiling
 
         cd ~/ros_ws/mra_ros_ws
-        rosdep install --from-paths src --ignore-src --rosdistro indigo -y
+        rosdep install --from-paths src --ignore-src --rosdistro indigo -y (If you meet some error, you need "rosdep update")
         catkin_make
         
 * Running
