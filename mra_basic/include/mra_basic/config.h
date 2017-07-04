@@ -12,7 +12,8 @@ namespace mra_basic_config {
 static std::string CAN_NODE_DEV = "/dev/pcanusb32";
 static std::vector<int> jointID; //read all joint id from CAN BUS
 static int GRIPPER_ID = -1;
-static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
+//static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
+static std::vector<std::string> joint_names;
 //std::vector<std::string> joint_names;
 #define CONTROL_RATE 100 //100HZ
 
@@ -24,7 +25,10 @@ static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4",
 #define RESET_MRA_API_TOPIC "/mra/reset_MRA_API"    //-->sub, When canbus interrupts, we need to reset MRA_API after reconnecting the usb-can.
 #define GRIPPER_COMMAND "/mra/gripper_command"
 
-/*Position controll topic*/
+/*Position controll topic subscribed by position controllers.
+ *  When you publish joint data to positon controller, you need these topic.
+ *  For example : joystick control
+ */
 #define JOINT1_POSITION_CONTROLLER "/mra7a/joint1_position_controller/command"
 #define JOINT2_POSITION_CONTROLLER "/mra7a/joint2_position_controller/command"
 #define JOINT3_POSITION_CONTROLLER "/mra7a/joint3_position_controller/command"
@@ -65,11 +69,11 @@ inline void get_param(ros::NodeHandle &nh)
         ROS_WARN("no joint_names param!, using default!");
     }
 
-    cout<<"joint name: ";
+    cout<<Color_light_cyan<<"joint name: ";
     for(int i=0; i<joint_names.size(); i++){
         cout<<joint_names[i]<<" ";
     }
-    cout<<endl;
+    cout<<endl<<Color_end;;
 
     if(!ros::param::get("CAN_NODE_DEV",CAN_NODE_DEV)){
         ROS_WARN("no CAN_NODE_DEV param!, using default!");

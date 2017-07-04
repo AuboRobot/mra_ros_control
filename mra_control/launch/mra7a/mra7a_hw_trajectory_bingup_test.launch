@@ -2,6 +2,7 @@
 <launch>
 
  <!-- <group ns="robot"> -->
+
     <!-- Load mra_basic configurations from YAML file to parameter server -->
     <rosparam file="$(find mra_basic)/config/basic_config.yaml" command="load" />
 
@@ -32,7 +33,7 @@
 
  <!--Simulator MRA_API to send joint state and mra state-->
 <node name="mra_joint_state_publisher" pkg="mra_joint_state_publisher" type="mra_joint_state_publisher_node" respawn="false"
-	  output="screen"/>
+	  output="screen" ns="mra7a"/>
 
 
 

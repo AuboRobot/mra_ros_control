@@ -150,7 +150,7 @@ void MRAHardwareInterface::stateCallback(const sensor_msgs::JointStateConstPtr& 
     // Check if this message has the correct number of joints
     if( msg->name.size() != this->num_mra_joints)
     {
-        ROS_ERROR("the size[%d] of joint state is not equal %d",msg->name.size(),this->num_mra_joints);
+        ROS_ERROR("The joint state's size from mra_basic is %d,  not equal %d from joint_names in basic_config.yaml",msg->name.size(),this->num_mra_joints);
         return;
     }
 

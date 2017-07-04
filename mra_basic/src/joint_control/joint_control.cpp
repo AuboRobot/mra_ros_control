@@ -109,7 +109,7 @@ void moveJ_callback(const std_msgs::Float32MultiArray::ConstPtr &msg)
     //             msg->data[0],msg->data[1],msg->data[2],msg->data[3],msg->data[4],msg->data[5],msg->data[6]);
 
     if(mra_state.canbus_state==mra_core_msgs::AssemblyState::CANBUS_STATE_NORMAL) {
-        for(int i=0; i<7; i++) {
+        for(int i=0; i<jointID.size(); i++) {
             bool isSent = userControlOnCan->setJointTagPos(jointID[i],msg->data[i]);
             if (isSent==false) {
                 ROS_ERROR("Senting is failure in ID:%d",jointID[i]);
@@ -141,7 +141,7 @@ void MRA_API_INIT(const std_msgs::Bool &reset) {
     } else {
         std::string s;
         userControlOnCan->controller.GetErrorText(s);
-        ROS_ERROR("Can't Open the pcanusb32:%s",s.c_str());
+        ROS_ERROR("Can't Open the peak can driver:%s",s.c_str());
     }
     if(userControlOnCan->controller.allGripper.size() != 0){
         gripper = userControlOnCan->findGripperID(mra_basic_config::GRIPPER_ID);
