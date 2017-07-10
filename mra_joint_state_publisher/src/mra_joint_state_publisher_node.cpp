@@ -10,7 +10,7 @@ using namespace mra_basic_config;
 sensor_msgs::JointState joints;
 
 void callBack(const mra_core_msgs::JointCommand &msg) {
-    for (int i=0; i<jointID.size(); i++) {
+    for (int i=0; i<joint_names.size(); i++) {
         joints.position[i] = msg.command[i];
         joints.velocity[i] = 0.00;
         joints.effort[i] = 0.000;

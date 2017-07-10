@@ -1,0 +1,129 @@
+mra6:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Mode controllers used to switch between control methods ----------------------------
+  position_joint_mode_controller:
+    type: joint_mode_controller/JointModeController
+    joint_mode: 1 # position
+
+  velocity_joint_mode_controller:
+    type: joint_mode_controller/JointModeController
+    joint_mode: 2 # velocity
+
+  # Position - Right and Left Joint Position Trajectory Controllers -------------------
+  arm_trajectory_controller:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - J1
+      - J2
+      - J3
+      - J4
+      - J5
+      - J6
+
+    constraints:
+      goal_time: 2.0                   # Defaults to zero
+      stopped_velocity_tolerance: 0.1 # Defaults to 0.01
+      J1:
+        trajectory: 0 
+        goal: 0.2       
+      J2:
+        trajectory: 0 
+        goal: 0.2       
+      J3:
+        trajectory: 0 
+        goal: 0.2       
+      J4:
+        trajectory: 0 
+        goal: 0.2       
+      J5:
+        trajectory: 0 
+        goal: 0.2       
+      J6:
+        trajectory: 0 
+        goal: 0.2             
+
+    state_publish_rate:  50 # Defaults to 50
+    action_monitor_rate: 20 # Defaults to 20
+    #hold_trajectory_duration: 0 # Defaults to 0.5
+
+
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J5
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J6
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+# Velocity - Joint Velocity Trajectory Controllers -------------------
+  arm_velocity_trajectory_controller:
+    type: "velocity_controllers/JointTrajectoryController"
+    joints:
+      - J1
+      - J2
+      - J3
+      - J4
+      - J5
+      - J6
+
+    constraints:
+      goal_time: 2.0                   # Defaults to zero
+      stopped_velocity_tolerance: 0.4 # Defaults to 0.01
+      J1:
+        trajectory: 0 
+        goal: 0.2       
+      J2:
+        trajectory: 0 
+        goal: 0.2       
+      J3:
+        trajectory: 0 
+        goal: 0.2       
+      J4:
+        trajectory: 0 
+        goal: 0.2       
+      J5:
+        trajectory: 0 
+        goal: 0.2       
+      J6:
+        trajectory: 0 
+        goal: 0.2       
+
+    gains:
+      J1: {p: 2.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      J2: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      J3: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      J4: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      J5: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+      J6: {p: 3.0,  i: 0.01, d: 1.0, i_clamp: 1}
+
+    state_publish_rate:  50 # Defaults to 50
+    action_monitor_rate: 20 # Defaults to 20
+    #hold_trajectory_duration: 0 # Defaults to 0.5
+
+
+
+

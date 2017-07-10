@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+ <!-- <group ns="robot"> -->
+
+    <!-- Load mra_basic configurations from YAML file to parameter server -->
+    <rosparam file="$(find mra_basic)/config/basic_config_mra6.yaml" command="load" />
+
+    <!-- GDB functionality -->
+    <arg name="debug" default="false" />
+    <arg unless="$(arg debug)" name="launch_prefix" value="" />
+    <arg     if="$(arg debug)" name="launch_prefix" value="gdb --ex run --args" />
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description"
+	   command="cat '$(find mra6_description)/urdf/mra6.urdf'" />
+
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find mra_control)/config/mra6_hardware_controllers.yaml" command="load"/>
+
+
+    <!-- Load the default controllers  -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	  output="screen" ns="mra6" args="position_joint_mode_controller
+                                            joint_state_controller
+					    arm_trajectory_controller 
+					    --timeout 50" />
+
+    <!-- Load hardware interface-->
+    <node name="mra_hardware_interface" pkg="mra_control" type="mra_hardware_interface"
+	  respawn="false" output="screen" ns="mra6"  launch-prefix="$(arg launch_prefix)"> 
+    </node>
+
+ <!--Simulator MRA_API to send joint state and mra state-->
+<node name="mra_joint_state_publisher" pkg="mra_joint_state_publisher" type="mra_joint_state_publisher_node" respawn="false"
+	  output="screen" ns="mra6"/>
+
+
+
+</launch>

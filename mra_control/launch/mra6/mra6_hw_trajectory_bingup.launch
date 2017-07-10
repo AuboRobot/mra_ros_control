@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+ <!-- <group ns="robot"> -->
+
+<!--Open a new terminal to execute the joint_control node
+<node name="mra_joint_control" pkg="mra_basic" type="joint_control" respawn="false"
+	  launch-prefix="gnome-terminal -e"/>
+-->
+
+    <!-- Load mra_basic configurations from YAML file to parameter server -->
+    <rosparam file="$(find mra_basic)/config/basic_config_mra6.yaml" command="load" />
+    <!--control the real MRA by canbus.-->
+    <node name="mra_joint_control" pkg="mra_basic" type="joint_control" respawn="false" output="screen" ns="mra7a"/>
+
+    <!-- GDB functionality -->
+    <arg name="debug" default="false" />
+    <arg unless="$(arg debug)" name="launch_prefix" value="" />
+    <arg     if="$(arg debug)" name="launch_prefix" value="gdb --ex run --args" />
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description"
+	   command="cat '$(find mra6_description)/urdf/mra6.urdf'" />
+
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find mra_control)/config/mra6_hardware_controllers.yaml" command="load"/>
+
+
+    <!-- Load the default controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	  output="screen" ns="mra6" args="position_joint_mode_controller
+                                            joint_state_controller
+					    arm_trajectory_controller
+					    --timeout 50" />
+
+    <!-- Load hardware interface-->
+    <node name="mra_hardware_interface" pkg="mra_control" type="mra_hardware_interface"
+	  respawn="false" output="screen" ns="mra6"> 
+    </node>
+
+
+
+
+
+
+</launch>

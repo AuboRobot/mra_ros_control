@@ -52,7 +52,7 @@ const std::vector<std::string> L_joint_names{"lJoint1","lJoint2","lJoint3","lJoi
 
 
 /**
- * @brief get_param
+ * @brief get_paramc
  * get param set in the basic_config.yaml
  * Note:using inline is helpful to avoid multiple define in complile both joint_control and control_panel.
  */
