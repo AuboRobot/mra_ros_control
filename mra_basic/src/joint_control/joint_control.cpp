@@ -204,11 +204,11 @@ int main(int argc, char **argv)
             }
             joint_state_pub.publish(joint_state);
 
-            /*pub mra_state*/
+            /*pub mra_state
             for(int i=0; i<jointID.size(); i++) {
                 //If any joint position>0.01 radio, the mra's joints are not in home position.Set ready = false.
                 joint_state.position[i] > 0.01 ? mra_state.ready=false : mra_state.ready=true;
-            }
+            }*/
             state_pub.publish(mra_state);
         }
 

@@ -12,8 +12,8 @@ namespace mra_basic_config {
 static std::string CAN_NODE_DEV = "/dev/pcanusb32";
 static std::vector<int> jointID; //read all joint id from CAN BUS
 static int GRIPPER_ID = -1;
-//static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};
-static std::vector<std::string> joint_names;
+static std::vector<std::string> joint_names{"Joint1","Joint2","Joint3","Joint4","Joint5","Joint6","Joint7"};//default value. You can run the node independently without get param for yaml.
+//static std::vector<std::string> joint_names;
 //std::vector<std::string> joint_names;
 #define CONTROL_RATE 100 //100HZ
 
