@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+    <!-- Load mra_basic configurations from YAML file to parameter server -->
+    <rosparam file="$(find mra_basic)/config/basic_config.yaml" command="load" />
+    <!--control the real MRA by canbus.-->
+    <node name="mra_joint_control" pkg="mra_basic" type="joint_control" respawn="false" output="screen" ns="mra7a"/>
+
+    <node name="mra_control_panel" pkg="mra_basic" type="control_panel" respawn="false"/>
+
+</launch>

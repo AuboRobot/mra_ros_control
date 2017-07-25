@@ -53,7 +53,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pbn_joint1Left_pressed()
 {
-    joints[0] = joints[0] - m_step * m_speed/100 < -M_PI ?
+    joints[0] = joints[0] - m_step * m_speed/100 < -M_PI/2 ?
                 joints[0] :
             joints[0] - m_step  * m_speed/100;
 
@@ -62,7 +62,7 @@ void MainWindow::on_pbn_joint1Left_pressed()
 
 void MainWindow::on_pbn_joint1Right_pressed()
 {
-    joints[0] = joints[0] + m_step * m_speed/100 > M_PI ?
+    joints[0] = joints[0] + m_step * m_speed/100 > M_PI/2 ?
                 joints[0] :
             joints[0] + m_step * m_speed/100;
 
@@ -71,7 +71,7 @@ void MainWindow::on_pbn_joint1Right_pressed()
 
 void MainWindow::on_pbn_joint2Left_pressed()
 {
-    joints[1] = joints[1] - m_step * m_speed/100 < -M_PI ?
+    joints[1] = joints[1] - m_step * m_speed/100 < -M_PI/2 ?
                 joints[1] :
             joints[1] - m_step * m_speed/100;
 
@@ -80,7 +80,7 @@ void MainWindow::on_pbn_joint2Left_pressed()
 
 void MainWindow::on_pbn_joint2Right_pressed()
 {
-    joints[1] = joints[1] + m_step * m_speed/100 > M_PI ?
+    joints[1] = joints[1] + m_step * m_speed/100 > M_PI/2 ?
                 joints[1] :
             joints[1] + m_step * m_speed/100;
 
@@ -89,7 +89,7 @@ void MainWindow::on_pbn_joint2Right_pressed()
 
 void MainWindow::on_pbn_joint3Left_pressed()
 {
-    joints[2] = joints[2] - m_step * m_speed/100 < -M_PI ?
+    joints[2] = joints[2] - m_step * m_speed/100 < -M_PI/2 ?
                 joints[2] :
             joints[2] - m_step * m_speed/100;
     ui->lb_joint3->setText(QString::number(joints[2]*180.0/M_PI, 'f', 6));
@@ -97,7 +97,7 @@ void MainWindow::on_pbn_joint3Left_pressed()
 
 void MainWindow::on_pbn_joint3Right_pressed()
 {
-    joints[2] = joints[2] + m_step * m_speed/100 > M_PI ?
+    joints[2] = joints[2] + m_step * m_speed/100 > M_PI/2 ?
                 joints[2] :
             joints[2] + m_step * m_speed/100;
 
@@ -106,7 +106,7 @@ void MainWindow::on_pbn_joint3Right_pressed()
 
 void MainWindow::on_pbn_joint4Left_pressed()
 {
-    joints[3] = joints[3] - m_step * m_speed/100 < -M_PI ?
+    joints[3] = joints[3] - m_step * m_speed/100 < -M_PI/2 ?
                 joints[3] :
             joints[3] - m_step * m_speed/100;
 
@@ -115,7 +115,7 @@ void MainWindow::on_pbn_joint4Left_pressed()
 
 void MainWindow::on_pbn_joint4Right_pressed()
 {
-    joints[3] = joints[3] + m_step * m_speed/100 > M_PI ?
+    joints[3] = joints[3] + m_step * m_speed/100 > M_PI/2 ?
                 joints[3] :
             joints[3] + m_step * m_speed/100;
 
@@ -124,7 +124,7 @@ void MainWindow::on_pbn_joint4Right_pressed()
 
 void MainWindow::on_pbn_joint5Left_pressed()
 {
-    joints[4] = joints[4] - m_step * m_speed/100 < -M_PI ?
+    joints[4] = joints[4] - m_step * m_speed/100 < -M_PI/2 ?
                 joints[4] :
             joints[4] - m_step * m_speed/100;
 
@@ -133,7 +133,7 @@ void MainWindow::on_pbn_joint5Left_pressed()
 
 void MainWindow::on_pbn_joint5Right_pressed()
 {
-    joints[4] = joints[4] + m_step * m_speed/100 > M_PI ?
+    joints[4] = joints[4] + m_step * m_speed/100 > M_PI/2 ?
                 joints[4] :
             joints[4] + m_step * m_speed/100;
 
@@ -142,7 +142,7 @@ void MainWindow::on_pbn_joint5Right_pressed()
 
 void MainWindow::on_pbn_joint6Left_pressed()
 {
-    joints[5] = joints[5] - m_step * m_speed/100 < -M_PI ?
+    joints[5] = joints[5] - m_step * m_speed/100 < -M_PI/2 ?
                 joints[5] :
             joints[5] - m_step * m_speed/100;
 
@@ -151,7 +151,7 @@ void MainWindow::on_pbn_joint6Left_pressed()
 
 void MainWindow::on_pbn_joint6Right_pressed()
 {
-    joints[5] = joints[5] + m_step * m_speed/100 > M_PI ?
+    joints[5] = joints[5] + m_step * m_speed/100 > M_PI/2 ?
                 joints[5] :
             joints[5] + m_step * m_speed/100;
 
@@ -160,7 +160,7 @@ void MainWindow::on_pbn_joint6Right_pressed()
 
 void MainWindow::on_pbn_joint7Left_pressed()
 {
-    joints[6] = joints[6] - m_step * m_speed/100 < -M_PI ?
+    joints[6] = joints[6] - m_step * m_speed/100 < -M_PI/2 ?
                 joints[6] :
             joints[6] - m_step * m_speed/100;
 
@@ -169,23 +169,33 @@ void MainWindow::on_pbn_joint7Left_pressed()
 
 void MainWindow::on_pbn_joint7Right_pressed()
 {
-    joints[6] = joints[6] + m_step * m_speed/100 > M_PI ?
+    joints[6] = joints[6] + m_step * m_speed/100 > M_PI/2 ?
                 joints[6] :
             joints[6] + m_step * m_speed/100;
 
     ui->lb_joint7->setText(QString::number(joints[6]*180.0/M_PI, 'f', 6));
 }
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_pbn_joint7Right_2_pressed()
 {
+    std::cout<<"hello"<<std::endl;
     for (int i=0; i<joints.size(); i++) {
-        joints[i] = 0.0;
+        if(joints[i] > 0.05){
+            joints[i] -= 0.05;
+        }
+        else if(joints[i] < -0.05){
+            joints[i] -= 0.05;
+        }
+        else{
+            joints[i] = 0;
+        }
+        ui->lb_joint1->setText(QString::number(joints[0], 'f', 6));
+        ui->lb_joint2->setText(QString::number(joints[1], 'f', 6));
+        ui->lb_joint3->setText(QString::number(joints[2], 'f', 6));
+        ui->lb_joint4->setText(QString::number(joints[3], 'f', 6));
+        ui->lb_joint5->setText(QString::number(joints[4], 'f', 6));
+        ui->lb_joint6->setText(QString::number(joints[5], 'f', 6));
+        ui->lb_joint7->setText(QString::number(joints[6], 'f', 6));
     }
-    ui->lb_joint1->setText(QString::number(joints[0], 'f', 6));
-    ui->lb_joint2->setText(QString::number(joints[1], 'f', 6));
-    ui->lb_joint3->setText(QString::number(joints[2], 'f', 6));
-    ui->lb_joint4->setText(QString::number(joints[3], 'f', 6));
-    ui->lb_joint5->setText(QString::number(joints[4], 'f', 6));
-    ui->lb_joint6->setText(QString::number(joints[5], 'f', 6));
-    ui->lb_joint7->setText(QString::number(joints[6], 'f', 6));
 }

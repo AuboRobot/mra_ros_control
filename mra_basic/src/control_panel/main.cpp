@@ -11,7 +11,7 @@ extern bool start_sending_joint_command;
 
 void chatterCallback(const sensor_msgs::JointStateConstPtr &msg)
 {
-    for(int i=0; i<mra_basic_config::jointID.size(); i++) {
+    for(int i=0; i<7; i++) {
         joints_init[i] = msg->position[i];
     }
     get_joints_init_position = true;
@@ -37,7 +37,7 @@ void *thread_caller(void *arg)
             nh.advertise<mra_core_msgs::JointCommand> (JOINT_COMMAND_TOPIC, 1000);
     ros::Rate loop_rate(CONTROL_RATE);//Hz
 
-    joints_init.resize(mra_basic_config::jointID.size());
+    joints_init.resize(7);
 
     mra_core_msgs::JointCommand joint_command;
     joint_command.mode = mra_core_msgs::JointCommand::POSITION_MODE;

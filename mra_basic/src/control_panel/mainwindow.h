@@ -35,7 +35,7 @@ private slots:
     void on_pbn_joint7Left_pressed();
     void on_pbn_joint7Right_pressed();
 
-    void on_pushButton_clicked();
+    void on_pbn_joint7Right_2_pressed();
 
 private:
     Ui::MainWindow *ui;
