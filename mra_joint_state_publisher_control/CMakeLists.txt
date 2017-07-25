@@ -8,9 +8,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++0x")
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-
-        mra_basic
-        mra_core_msgs)
+    moveit_core
+    moveit_ros_planning
+    moveit_ros_planning_interface
+    mra_basic
+    mra_core_msgs)
 
 
 
@@ -33,4 +35,6 @@ ADD_EXECUTABLE(joint_state_publisher_control src/joint_state_publisher_control.c
 TARGET_LINK_LIBRARIES(joint_state_publisher_control ${catkin_LIBRARIES} ${libOURAPI_LIBS})
 add_dependencies(joint_state_publisher_control ${catkin_EXPORTED_TARGETS}) # don't build until necessary msgs are finish
 
-
+ADD_EXECUTABLE(plan_to_home src/plan_to_home.cpp)
+TARGET_LINK_LIBRARIES(plan_to_home ${catkin_LIBRARIES} ${libOURAPI_LIBS})
+add_dependencies(plan_to_home ${catkin_EXPORTED_TARGETS}) # don't build until necessary msgs are finish
