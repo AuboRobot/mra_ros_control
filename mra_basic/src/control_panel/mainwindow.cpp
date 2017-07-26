@@ -179,23 +179,22 @@ void MainWindow::on_pbn_joint7Right_pressed()
 
 void MainWindow::on_pbn_joint7Right_2_pressed()
 {
-    std::cout<<"hello"<<std::endl;
     for (int i=0; i<joints.size(); i++) {
         if(joints[i] > 0.05){
             joints[i] -= 0.05;
         }
         else if(joints[i] < -0.05){
-            joints[i] -= 0.05;
+            joints[i] += 0.05;
         }
         else{
             joints[i] = 0;
         }
-        ui->lb_joint1->setText(QString::number(joints[0], 'f', 6));
-        ui->lb_joint2->setText(QString::number(joints[1], 'f', 6));
-        ui->lb_joint3->setText(QString::number(joints[2], 'f', 6));
-        ui->lb_joint4->setText(QString::number(joints[3], 'f', 6));
-        ui->lb_joint5->setText(QString::number(joints[4], 'f', 6));
-        ui->lb_joint6->setText(QString::number(joints[5], 'f', 6));
-        ui->lb_joint7->setText(QString::number(joints[6], 'f', 6));
     }
+    ui->lb_joint1->setText(QString::number(joints[0]*180.0/M_PI, 'f', 6));
+    ui->lb_joint2->setText(QString::number(joints[1]*180.0/M_PI, 'f', 6));
+    ui->lb_joint3->setText(QString::number(joints[2]*180.0/M_PI, 'f', 6));
+    ui->lb_joint4->setText(QString::number(joints[3]*180.0/M_PI, 'f', 6));
+    ui->lb_joint5->setText(QString::number(joints[4]*180.0/M_PI, 'f', 6));
+    ui->lb_joint6->setText(QString::number(joints[5]*180.0/M_PI, 'f', 6));
+    ui->lb_joint7->setText(QString::number(joints[6]*180.0/M_PI, 'f', 6));
 }
