@@ -13,7 +13,7 @@ Indigo | Kinetic
 4. The **mra_joint_state_publisher** package is used to simulate MRA_API to send joint state and mra state<br>
 5. The **ros_control** stack :See [ros_control documentation](http://ros.org/wiki/ros_control) on ros.org<br>
 6. The **ros_controllers** stack is the implement of related ros controllers.<br>
-7. The **mra_joint_state_publisher** package is used to control mra joints by subscribing the "/joint_state" topic published by starting demo.launch in the *_moveit_config.
+7. The **mra_joint_state_publisher_control** package is used to control mra joints by subscribing the "/joint_state" topic published by starting demo.launch in the *_moveit_config.
 
 ## Features
 <img align="right" src="./resources/mra7a.png" width=500 height=300/>
