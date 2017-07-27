@@ -52,6 +52,8 @@ using namespace std;
 UserControlOnCan *userControlOnCan;
 Gripper *gripper;
 mra_core_msgs::AssemblyState mra_state;
+bool senting_error = false;
+int error_count = 0;
 
 void copy_ID_in_current_canbus()
 {
@@ -87,6 +89,7 @@ void copy_ID_in_current_canbus()
 
 void joint_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
 {
+    /*print joint command messages*/
     //    for(int i=0; i<msg->command.size(); i++) {
     //        std::cout<<msg->command[i]<<" || ";
     //    }
@@ -96,10 +99,21 @@ void joint_command_callback(const mra_core_msgs::JointCommandConstPtr &msg)
         for(int i=0; i<jointID.size(); i++) {
             bool isSent = userControlOnCan->setJointTagPos(jointID[i],msg->command[i]);
             if (isSent==false) {
-                ROS_ERROR("Senting is failure in ID:%d",jointID[i]);
-                //set canbus state = CANBUS_STATE_INTERRUPT
-                mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_INTERRUPT;
+                senting_error = true;
+                //ROS_WARN("Senting is failure in ID:%d",jointID[i]);
             }
+        }
+        /*Continuous error 5 times*/
+        if(senting_error){
+            error_count++;
+            senting_error = false;
+        }else{
+            error_count = 0;
+        }
+        if(error_count >= 5){
+            ROS_ERROR("Senting Error Number >= 5");
+            //set canbus state = CANBUS_STATE_INTERRUPT
+            //mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_INTERRUPT;
         }
     }
 }
@@ -112,11 +126,12 @@ void moveJ_callback(const std_msgs::Float32MultiArray::ConstPtr &msg)
         for(int i=0; i<jointID.size(); i++) {
             bool isSent = userControlOnCan->setJointTagPos(jointID[i],msg->data[i]);
             if (isSent==false) {
-                ROS_ERROR("Senting is failure in ID:%d",jointID[i]);
+                ROS_WARN("Senting is failure in ID:%d",jointID[i]);
                 //set canbus state = CANBUS_STATE_INTERRUPT
                 mra_state.canbus_state = mra_core_msgs::AssemblyState::CANBUS_STATE_INTERRUPT;
             }
         }
+
     }
 }
 
