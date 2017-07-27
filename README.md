@@ -25,7 +25,7 @@ Indigo | Kinetic
 *  Multiple kinds of control mode
     * basic position, velocity, effort.
     * controlling signle joint or arms by ros_control.
-    
+      
 ## Prerequisites
 * A kind of MRA description with moveit configure.(If you need to plan to control the mra.) For example [mra7a](https://github.com/auboROS/mra7a).
 * A real MRA and gripper(Optional).
